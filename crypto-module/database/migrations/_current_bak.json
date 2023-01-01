@@ -1,0 +1,1347 @@
+{
+    "tables": {
+        "addresses": {
+            "tableName": "addresses",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "cryptoId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "cryptos",
+                        "key": "id"
+                    },
+                    "field": "cryptoId",
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "addressableType": {
+                    "allowNull": false,
+                    "field": "addressableType",
+                    "seqType": "Sequelize.STRING"
+                },
+                "addressableId": {
+                    "allowNull": false,
+                    "field": "addressableId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "address": {
+                    "allowNull": false,
+                    "field": "address",
+                    "seqType": "Sequelize.STRING"
+                },
+                "label": {
+                    "allowNull": false,
+                    "field": "label",
+                    "seqType": "Sequelize.STRING"
+                },
+                "memo": {
+                    "allowNull": true,
+                    "field": "memo",
+                    "seqType": "Sequelize.STRING"
+                },
+                "isActive": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "isActive",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "4d9668ad25b2be0f9b063f7f1b3d706698a0b948": {
+                    "fields": [
+                        "address"
+                    ],
+                    "name": "addresses_address",
+                    "options": {
+                        "indexName": "addresses_address",
+                        "name": "addresses_address"
+                    }
+                },
+                "0c7917631239fb0d417e275779b5095eebf205ac": {
+                    "fields": [
+                        "cryptoId"
+                    ],
+                    "name": "addresses_crypto_id",
+                    "options": {
+                        "indexName": "addresses_crypto_id",
+                        "name": "addresses_crypto_id"
+                    }
+                },
+                "eb4aba67960f42a5e0ac98dd0d7a25b9a4566f6b": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "addresses_uuid",
+                    "options": {
+                        "indexName": "addresses_uuid",
+                        "name": "addresses_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "6b7c2b93dd7cafba07a85140517bdb475f18a046": {
+                    "unique": false,
+                    "fields": [
+                        "addressableId"
+                    ],
+                    "name": "addresses_addressable_id",
+                    "options": {
+                        "indexName": "addresses_addressable_id",
+                        "name": "addresses_addressable_id"
+                    }
+                },
+                "232940f49d02b1bdd4e13372f217ba3ca2b50500": {
+                    "fields": [
+                        "addressableType",
+                        "addressableId"
+                    ],
+                    "name": "addresses_addressable_type_addressable_id",
+                    "options": {
+                        "indexName": "addresses_addressable_type_addressable_id",
+                        "name": "addresses_addressable_type_addressable_id"
+                    }
+                }
+            }
+        },
+        "cryptos": {
+            "tableName": "cryptos",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "name": {
+                    "allowNull": false,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "slug": {
+                    "allowNull": false,
+                    "unique": true,
+                    "field": "slug",
+                    "seqType": "Sequelize.STRING"
+                },
+                "symbol": {
+                    "allowNull": false,
+                    "field": "symbol",
+                    "seqType": "Sequelize.STRING"
+                },
+                "sign": {
+                    "allowNull": false,
+                    "field": "sign",
+                    "seqType": "Sequelize.STRING"
+                },
+                "type": {
+                    "allowNull": false,
+                    "field": "type",
+                    "seqType": "Sequelize.STRING"
+                },
+                "isActive": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "isActive",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "8fd1f872829a60c00ed63be1694910de780f2ad8": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "cryptos_uuid",
+                    "options": {
+                        "indexName": "cryptos_uuid",
+                        "name": "cryptos_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "9c56d62b0e0c76271e2ef54030eacdcbd75a46e4": {
+                    "unique": true,
+                    "fields": [
+                        "slug"
+                    ],
+                    "name": "cryptos_slug",
+                    "options": {
+                        "indexName": "cryptos_slug",
+                        "name": "cryptos_slug",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "02541aa7aee19f38ac59b5f0d2d452d0ad2deba2": {
+                    "fields": [
+                        "isActive"
+                    ],
+                    "name": "cryptos_is_active",
+                    "options": {
+                        "indexName": "cryptos_is_active",
+                        "name": "cryptos_is_active"
+                    }
+                }
+            }
+        },
+        "crypto_wallets": {
+            "tableName": "crypto_wallets",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "cryptoId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "cryptos",
+                        "key": "id"
+                    },
+                    "field": "cryptoId",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "clientId": {
+                    "allowNull": false,
+                    "field": "clientId",
+                    "seqType": "Sequelize.UUID"
+                },
+                "balance": {
+                    "allowNull": false,
+                    "field": "balance",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "isActive": {
+                    "allowNull": false,
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "isActive",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "8fb6e2d9ae8174925a5505ffb63f041d30f06e51": {
+                    "fields": [
+                        "clientId"
+                    ],
+                    "name": "crypto_wallets_client_id",
+                    "options": {
+                        "indexName": "crypto_wallets_client_id",
+                        "name": "crypto_wallets_client_id"
+                    }
+                },
+                "cbd3a73f0af91b5eedcfa1660ca65600c1bc8b4d": {
+                    "fields": [
+                        "cryptoId"
+                    ],
+                    "name": "crypto_wallets_crypto_id",
+                    "options": {
+                        "indexName": "crypto_wallets_crypto_id",
+                        "name": "crypto_wallets_crypto_id"
+                    }
+                },
+                "f83c19de8bb89f23d5296a7c066470bf9d4173ea": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "crypto_wallets_uuid",
+                    "options": {
+                        "indexName": "crypto_wallets_uuid",
+                        "name": "crypto_wallets_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "b90a186cedbc6ec3739d2ae4d0d0ef299041dccc": {
+                    "fields": [
+                        "clientId",
+                        "cryptoId"
+                    ],
+                    "name": "crypto_wallets_client_id_crypto_id",
+                    "options": {
+                        "indexName": "crypto_wallets_client_id_crypto_id",
+                        "name": "crypto_wallets_client_id_crypto_id"
+                    }
+                }
+            }
+        },
+        "payment_links": {
+            "tableName": "payment_links",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "reference": {
+                    "allowNull": false,
+                    "unique": true,
+                    "field": "reference",
+                    "seqType": "Sequelize.STRING"
+                },
+                "clientId": {
+                    "allowNull": false,
+                    "field": "clientId",
+                    "seqType": "Sequelize.UUID"
+                },
+                "amount": {
+                    "allowNull": false,
+                    "field": "amount",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "type": {
+                    "allowNull": false,
+                    "field": "type",
+                    "seqType": "Sequelize.STRING"
+                },
+                "amountType": {
+                    "allowNull": false,
+                    "field": "amountType",
+                    "seqType": "Sequelize.STRING"
+                },
+                "availableCrypto": {
+                    "allowNull": false,
+                    "field": "availableCrypto",
+                    "seqType": "Sequelize.JSON"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metaData": {
+                    "allowNull": false,
+                    "field": "metaData",
+                    "seqType": "Sequelize.JSON"
+                },
+                "expiresAt": {
+                    "allowNull": false,
+                    "field": "expiresAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "5fd2c159c7b16026f6d37ff9491df0e92f37061a": {
+                    "unique": true,
+                    "fields": [
+                        "reference"
+                    ],
+                    "name": "payment_links_reference",
+                    "options": {
+                        "indexName": "payment_links_reference",
+                        "name": "payment_links_reference",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "c8a758b5fb3416c4faebc1f9eb8ffbb7714c43ce": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "payment_links_uuid",
+                    "options": {
+                        "indexName": "payment_links_uuid",
+                        "name": "payment_links_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        },
+        "payment_link_transactions": {
+            "tableName": "payment_link_transactions",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "transactionId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "transactions",
+                        "key": "id"
+                    },
+                    "field": "transactionId",
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "paymentLinkId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "payment_links",
+                        "key": "id"
+                    },
+                    "field": "paymentLinkId",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "cryptoWalletId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "crypto_wallets",
+                        "key": "id"
+                    },
+                    "field": "cryptoWalletId",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "amountInUsd": {
+                    "allowNull": false,
+                    "field": "amountInUsd",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "amountInCrypto": {
+                    "allowNull": false,
+                    "field": "amountInCrypto",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "confirmedAmountInUsd": {
+                    "allowNull": true,
+                    "field": "confirmedAmountInUsd",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "confirmedAmountInCrypto": {
+                    "allowNull": true,
+                    "field": "confirmedAmountInCrypto",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "rate": {
+                    "allowNull": false,
+                    "field": "rate",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "996ec7816ab2085b3f9fe98104a4d8af5ddcdf6d": {
+                    "fields": [
+                        "transactionId"
+                    ],
+                    "name": "payment_link_transactions_transaction_id",
+                    "options": {
+                        "indexName": "payment_link_transactions_transaction_id",
+                        "name": "payment_link_transactions_transaction_id"
+                    }
+                },
+                "8b6955b91dca3f977bc04bf9dce543220ae54875": {
+                    "fields": [
+                        "paymentLinkId"
+                    ],
+                    "name": "payment_link_transactions_payment_link_id",
+                    "options": {
+                        "indexName": "payment_link_transactions_payment_link_id",
+                        "name": "payment_link_transactions_payment_link_id"
+                    }
+                },
+                "9b7f9a8ac32eb18065ddec8850ad9cedbeac7c8b": {
+                    "fields": [
+                        "cryptoWalletId"
+                    ],
+                    "name": "payment_link_transactions_crypto_wallet_id",
+                    "options": {
+                        "indexName": "payment_link_transactions_crypto_wallet_id",
+                        "name": "payment_link_transactions_crypto_wallet_id"
+                    }
+                },
+                "d858eee1de2a0c24f46afa526c8007c20fcc744c": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "payment_link_transactions_uuid",
+                    "options": {
+                        "indexName": "payment_link_transactions_uuid",
+                        "name": "payment_link_transactions_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        },
+        "payment_pages": {
+            "tableName": "payment_pages",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "reference": {
+                    "allowNull": false,
+                    "unique": true,
+                    "field": "reference",
+                    "seqType": "Sequelize.STRING"
+                },
+                "clientId": {
+                    "allowNull": false,
+                    "field": "clientId",
+                    "seqType": "Sequelize.UUID"
+                },
+                "amount": {
+                    "allowNull": false,
+                    "field": "amount",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "amountType": {
+                    "allowNull": false,
+                    "field": "amountType",
+                    "seqType": "Sequelize.STRING"
+                },
+                "availableCrypto": {
+                    "allowNull": false,
+                    "field": "availableCrypto",
+                    "seqType": "Sequelize.JSON"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metaData": {
+                    "allowNull": false,
+                    "field": "metaData",
+                    "seqType": "Sequelize.JSON"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "fd4a4e69b7755feb3d8ba372115fa8b69356bb89": {
+                    "unique": true,
+                    "fields": [
+                        "reference"
+                    ],
+                    "name": "payment_pages_reference",
+                    "options": {
+                        "indexName": "payment_pages_reference",
+                        "name": "payment_pages_reference",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "8532abb68a3691c160da92158410cfbdc5452ae3": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "payment_pages_uuid",
+                    "options": {
+                        "indexName": "payment_pages_uuid",
+                        "name": "payment_pages_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        },
+        "payment_page_transactions": {
+            "tableName": "payment_page_transactions",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "transactionId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "transactions",
+                        "key": "id"
+                    },
+                    "field": "transactionId",
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "paymentPageId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "payment_pages",
+                        "key": "id"
+                    },
+                    "field": "paymentPageId",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "cryptoWalletId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "crypto_wallets",
+                        "key": "id"
+                    },
+                    "field": "cryptoWalletId",
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "amountInUsd": {
+                    "allowNull": false,
+                    "field": "amountInUsd",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "amountInCrypto": {
+                    "allowNull": false,
+                    "field": "amountInCrypto",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "confirmedAmountInUsd": {
+                    "allowNull": true,
+                    "field": "confirmedAmountInUsd",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "confirmedAmountInCrypto": {
+                    "allowNull": true,
+                    "field": "confirmedAmountInCrypto",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "rate": {
+                    "allowNull": false,
+                    "field": "rate",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "reference": {
+                    "allowNull": false,
+                    "unique": true,
+                    "field": "reference",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metaData": {
+                    "allowNull": false,
+                    "field": "metaData",
+                    "seqType": "Sequelize.JSON"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "1f996b9489f84e64e2a9ac0a8d2cf07d2c5236be": {
+                    "fields": [
+                        "transactionId"
+                    ],
+                    "name": "payment_page_transactions_transaction_id",
+                    "options": {
+                        "indexName": "payment_page_transactions_transaction_id",
+                        "name": "payment_page_transactions_transaction_id"
+                    }
+                },
+                "7d7ac606726d3d66293a7a4fcafef8f3faed2c77": {
+                    "fields": [
+                        "paymentPageId"
+                    ],
+                    "name": "payment_page_transactions_payment_page_id",
+                    "options": {
+                        "indexName": "payment_page_transactions_payment_page_id",
+                        "name": "payment_page_transactions_payment_page_id"
+                    }
+                },
+                "03b1ad48ba6761b3d2fea3655048b48b24397cdb": {
+                    "fields": [
+                        "cryptoWalletId"
+                    ],
+                    "name": "payment_page_transactions_crypto_wallet_id",
+                    "options": {
+                        "indexName": "payment_page_transactions_crypto_wallet_id",
+                        "name": "payment_page_transactions_crypto_wallet_id"
+                    }
+                },
+                "eae541fdf336c5f1033b046d38133c05f957506a": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "payment_page_transactions_uuid",
+                    "options": {
+                        "indexName": "payment_page_transactions_uuid",
+                        "name": "payment_page_transactions_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        },
+        "transactions": {
+            "tableName": "transactions",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "cryptoId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "cryptos",
+                        "key": "id"
+                    },
+                    "field": "cryptoId",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "clientId": {
+                    "allowNull": false,
+                    "field": "clientId",
+                    "seqType": "Sequelize.UUID"
+                },
+                "transferableType": {
+                    "allowNull": false,
+                    "field": "transferableType",
+                    "seqType": "Sequelize.STRING"
+                },
+                "amount": {
+                    "allowNull": false,
+                    "field": "amount",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "declinedAt": {
+                    "allowNull": true,
+                    "field": "declinedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "declinedReason": {
+                    "allowNull": true,
+                    "field": "declinedReason",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "fdf5ae5dadfd039df1197bb6d1e60e01561b07bf": {
+                    "fields": [
+                        "cryptoId"
+                    ],
+                    "name": "transactions_crypto_id",
+                    "options": {
+                        "indexName": "transactions_crypto_id",
+                        "name": "transactions_crypto_id"
+                    }
+                },
+                "26b730447cebe066adc3ff60659896a1f05047f2": {
+                    "fields": [
+                        "clientId"
+                    ],
+                    "name": "transactions_client_id",
+                    "options": {
+                        "indexName": "transactions_client_id",
+                        "name": "transactions_client_id"
+                    }
+                },
+                "ada067e132fa714423037c6e7d8baf3fad8bdcd8": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "transactions_uuid",
+                    "options": {
+                        "indexName": "transactions_uuid",
+                        "name": "transactions_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "58a7be902eba9a07b83c91b542c968bc3ec79fc9": {
+                    "unique": false,
+                    "fields": [
+                        "transferableType"
+                    ],
+                    "name": "transactions_transferable_type",
+                    "options": {
+                        "indexName": "transactions_transferable_type",
+                        "name": "transactions_transferable_type"
+                    }
+                },
+                "7311c9280ed5ff42f9aa78f06d82b6b9d9c78ad3": {
+                    "fields": [
+                        "cryptoId",
+                        "transferableType"
+                    ],
+                    "name": "transactions_crypto_id_transferable_type",
+                    "options": {
+                        "indexName": "transactions_crypto_id_transferable_type",
+                        "name": "transactions_crypto_id_transferable_type"
+                    }
+                }
+            }
+        },
+        "transfers": {
+            "tableName": "transfers",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "cryptoId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "cryptos",
+                        "key": "id"
+                    },
+                    "field": "cryptoId",
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "transferableType": {
+                    "allowNull": false,
+                    "field": "transferableType",
+                    "seqType": "Sequelize.STRING"
+                },
+                "transferableId": {
+                    "allowNull": false,
+                    "field": "transferableId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "txId": {
+                    "allowNull": true,
+                    "field": "txId",
+                    "seqType": "Sequelize.STRING"
+                },
+                "amount": {
+                    "allowNull": false,
+                    "field": "amount",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "fee": {
+                    "allowNull": false,
+                    "field": "fee",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "address": {
+                    "allowNull": false,
+                    "field": "address",
+                    "seqType": "Sequelize.STRING"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "memo": {
+                    "allowNull": true,
+                    "field": "memo",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "729ca084af431fc1428d67e386c2a9c6e6109559": {
+                    "fields": [
+                        "txId"
+                    ],
+                    "name": "transfers_tx_id",
+                    "options": {
+                        "indexName": "transfers_tx_id",
+                        "name": "transfers_tx_id"
+                    }
+                },
+                "774066ef3a4c19716e3715358a8fe033659d0610": {
+                    "fields": [
+                        "cryptoId"
+                    ],
+                    "name": "transfers_crypto_id",
+                    "options": {
+                        "indexName": "transfers_crypto_id",
+                        "name": "transfers_crypto_id"
+                    }
+                },
+                "6acfe2fae9a8b6a06234046de19286d93222bd49": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "transfers_uuid",
+                    "options": {
+                        "indexName": "transfers_uuid",
+                        "name": "transfers_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                },
+                "0a6a195c006037bc72425cdeff96c054d68d1351": {
+                    "unique": false,
+                    "fields": [
+                        "address"
+                    ],
+                    "name": "transfers_address",
+                    "options": {
+                        "indexName": "transfers_address",
+                        "name": "transfers_address"
+                    }
+                },
+                "7672f800ad050b85bdde60a3a44fca6e235b259b": {
+                    "unique": false,
+                    "fields": [
+                        "transferableId"
+                    ],
+                    "name": "transfers_transferable_id",
+                    "options": {
+                        "indexName": "transfers_transferable_id",
+                        "name": "transfers_transferable_id"
+                    }
+                },
+                "d66279bbdc75dc0168dc14529439de7ae1099742": {
+                    "fields": [
+                        "transferableType",
+                        "transferableId"
+                    ],
+                    "name": "transfers_transferable_type_transferable_id",
+                    "options": {
+                        "indexName": "transfers_transferable_type_transferable_id",
+                        "name": "transfers_transferable_type_transferable_id"
+                    }
+                }
+            }
+        },
+        "crypto_wallet_histories": {
+            "tableName": "crypto_wallet_histories",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "cryptoWalletId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "crypto_wallets",
+                        "key": "id"
+                    },
+                    "field": "cryptoWalletId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "transactionId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "transactions",
+                        "key": "id"
+                    },
+                    "field": "transactionId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "previousBalance": {
+                    "allowNull": false,
+                    "field": "previousBalance",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "currentBalance": {
+                    "allowNull": false,
+                    "field": "currentBalance",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "CryptoWalletId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "crypto_wallets",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "CryptoWalletId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "TransactionId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "transactions",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "TransactionId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": {
+                "a80b615de8509949f654a17f71b41dcc09dc7760": {
+                    "fields": [
+                        "cryptoWalletId"
+                    ],
+                    "name": "crypto_wallet_histories_crypto_wallet_id",
+                    "options": {
+                        "indexName": "crypto_wallet_histories_crypto_wallet_id",
+                        "name": "crypto_wallet_histories_crypto_wallet_id"
+                    }
+                },
+                "07d702b7233fb29cae037b66614dd7acf4d0a0e2": {
+                    "fields": [
+                        "transactionId"
+                    ],
+                    "name": "crypto_wallet_histories_transaction_id",
+                    "options": {
+                        "indexName": "crypto_wallet_histories_transaction_id",
+                        "name": "crypto_wallet_histories_transaction_id"
+                    }
+                }
+            }
+        },
+        "crypto_wallet_transactions": {
+            "tableName": "crypto_wallet_transactions",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "uuid": {
+                    "allowNull": false,
+                    "unique": true,
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.UUIDV4"
+                    },
+                    "field": "uuid",
+                    "seqType": "Sequelize.UUID"
+                },
+                "transactionId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "transactions",
+                        "key": "id"
+                    },
+                    "field": "transactionId",
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "cryptoWalletId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "crypto_wallets",
+                        "key": "id"
+                    },
+                    "field": "cryptoWalletId",
+                    "onDelete": "NO ACTION",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "amount": {
+                    "allowNull": false,
+                    "field": "amount",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "fee": {
+                    "allowNull": false,
+                    "field": "fee",
+                    "seqType": "Sequelize.DECIMAL(45, 25)"
+                },
+                "type": {
+                    "allowNull": false,
+                    "field": "type",
+                    "seqType": "Sequelize.STRING"
+                },
+                "status": {
+                    "allowNull": false,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "memo": {
+                    "allowNull": false,
+                    "field": "memo",
+                    "seqType": "Sequelize.STRING"
+                },
+                "address": {
+                    "allowNull": false,
+                    "field": "address",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "CryptoWalletId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "crypto_wallets",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "CryptoWalletId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "TransactionId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "transactions",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "TransactionId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": {
+                "9080a54e3c1bc4413fbbd52108e972a8bd42251d": {
+                    "fields": [
+                        "transactionId"
+                    ],
+                    "name": "crypto_wallet_transactions_transaction_id",
+                    "options": {
+                        "indexName": "crypto_wallet_transactions_transaction_id",
+                        "name": "crypto_wallet_transactions_transaction_id"
+                    }
+                },
+                "2ca999eb4e4d6f5401c93f3ce114c110b5d74d1e": {
+                    "fields": [
+                        "cryptoWalletId"
+                    ],
+                    "name": "crypto_wallet_transactions_crypto_wallet_id",
+                    "options": {
+                        "indexName": "crypto_wallet_transactions_crypto_wallet_id",
+                        "name": "crypto_wallet_transactions_crypto_wallet_id"
+                    }
+                },
+                "8e638115f02fbbc046cc6aa924f86fc18db48547": {
+                    "unique": true,
+                    "fields": [
+                        "uuid"
+                    ],
+                    "name": "crypto_wallet_transactions_uuid",
+                    "options": {
+                        "indexName": "crypto_wallet_transactions_uuid",
+                        "name": "crypto_wallet_transactions_uuid",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        }
+    },
+    "revision": 2
+}

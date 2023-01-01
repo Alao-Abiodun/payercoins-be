@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FLUTTERWAVE TRANSFER</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+      * {
+        font-family: Montserrat;
+      }
+      body {
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="text-center">FLUTTERWAVE TRANSFER</h1>
+      <hr />
+      <h4>Input</h4>
+      <hr />
+      <p>
+        Please type your details, and get your money transfer from any current
+        to Naira!
+      </p>
+      <form class="form" action="/scan" method="POST">
+        <input
+          name="url"
+          class="form-control"
+          placeholder="Enter bank Code"
+          type="text"
+          required
+        />
+        <br />
+        <input
+          name="url"
+          class="form-control"
+          placeholder="Enter bank name"
+          type="text"
+          required
+        />
+        <br />
+        <input
+          name="url"
+          class="form-control"
+          placeholder="Enter Amount"
+          type="text"
+          required
+        />
+        <br />
+        <button type="submit" class="btn btn-primary" value="Initiate Transfer">
+          Transfer Money
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

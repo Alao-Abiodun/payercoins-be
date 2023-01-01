@@ -1,0 +1,19 @@
+# path to database-config
+- live: database/database-config-live.js
+- sandbox: database/database-config-sandbox.js
+
+# to run migrations 
+- live: sequelize db:migrate --config 'database/database-config-live.js'
+- sandbox: sequelize db:migrate --config 'database/database-config-sandbox.js'
+- together: sequelize db:migrate --config 'database/database-config-live.js' && sequelize db:migrate --config 'database/database-config-sandbox.js'
+
+# to undo migrations 
+- live: npx sequelize-cli db:migrate:undo --config 'database/database-config-live.js'
+- sandbox: npx sequelize-cli db:migrate:undo --config 'database/database-config-sandbox.js'
+- together: npx sequelize-cli db:migrate:undo --config 'database/database-config-live.js' && npx sequelize-cli db:migrate:undo --config 'database/database-config-sandbox.js'
+
+# to call database
+- live: const database = require('./database/models/index')({environment: 'live'});
+- sandbox: const database = require('./database/models/index')({environment: 'sandbox'});
+
+# npm run db:makemigrations

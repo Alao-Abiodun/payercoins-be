@@ -1,0 +1,59 @@
+diff --git a/node_modules/sequelize-auto-migrations/bin/makemigration.js b/node_modules/sequelize-auto-migrations/bin/makemigration.js
+index dcbaa49..36f3e75 100755
+--- a/node_modules/sequelize-auto-migrations/bin/makemigration.js
++++ b/node_modules/sequelize-auto-migrations/bin/makemigration.js
+@@ -17,7 +17,8 @@ const optionDefinitions = [
+     { name: 'execute', alias: 'x', type: Boolean, description: 'Create new migration and execute it' },
+     { name: 'migrations-path', type: String, description: 'The path to the migrations folder' },
+     { name: 'models-path', type: String, description: 'The path to the models folder' },
+-    { name: 'help', type: Boolean, description: 'Show this message' }
++    { name: 'help', type: Boolean, description: 'Show this message' },
++    { name: 'environment', type: String, description: 'The environment to use ("sandbox" || "live")' },
+ ];
+ 
+ const options = commandLineArgs(optionDefinitions);
+@@ -69,8 +70,7 @@ try {
+ } catch (e) { }
+ 
+ //console.log(path.join(migrationsDir, '_current.json'), JSON.parse(fs.readFileSync(path.join(migrationsDir, '_current.json') )))
+-let sequelize = require(modelsDir).sequelize;
+-
++let sequelize = require(modelsDir)({environment: options.environment}).sequelize;
+ let models = sequelize.models;
+ 
+ currentState.tables = migrate.reverseModels(sequelize, models);
+diff --git a/node_modules/sequelize-auto-migrations/bin/runmigration.js b/node_modules/sequelize-auto-migrations/bin/runmigration.js
+index d468b66..a98a414 100755
+--- a/node_modules/sequelize-auto-migrations/bin/runmigration.js
++++ b/node_modules/sequelize-auto-migrations/bin/runmigration.js
+@@ -17,7 +17,8 @@ const optionDefinitions = [
+     { name: 'list', alias: 'l', type: Boolean, description: 'Show migration file list (without execution)', defaultValue: false },
+     { name: 'migrations-path', type: String, description: 'The path to the migrations folder' },
+     { name: 'models-path', type: String, description: 'The path to the models folder' },
+-    { name: 'help', type: Boolean, description: 'Show this message' }
++    { name: 'help', type: Boolean, description: 'Show this message' },
++    { name: 'environment', type: String, description: 'The environment to use ("sandbox" || "live")' },
+ ];
+ 
+ const options = commandLineArgs(optionDefinitions);
+@@ -52,7 +53,7 @@ if (options.help)
+     process.exit(0);
+ }
+ 
+-const sequelize = require(modelsDir).sequelize;
++const sequelize = require(modelsDir)({environment: options.environment}).sequelize;
+ const queryInterface = sequelize.getQueryInterface();
+ 
+ // execute all migration from
+diff --git a/node_modules/sequelize-auto-migrations/lib/pathconfig.js b/node_modules/sequelize-auto-migrations/lib/pathconfig.js
+index 7c54fd9..968a99d 100644
+--- a/node_modules/sequelize-auto-migrations/lib/pathconfig.js
++++ b/node_modules/sequelize-auto-migrations/lib/pathconfig.js
+@@ -15,7 +15,6 @@ module.exports = function(options){
+     
+     let migrationsDir = path.join(process.env.PWD, 'migrations'),
+         modelsDir = path.join(process.env.PWD, 'models');
+-        
+     if (options['migrations-path']) {
+         migrationsDir = path.join(process.env.PWD, options['migrations-path']);
+     } else if (sequelizercConfigs['migrations-path']) {

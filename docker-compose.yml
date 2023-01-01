@@ -1,0 +1,68 @@
+version: '3.6'
+services:
+
+  # Payercoins Backend System
+  # payercoins-backend:
+  #   container_name: payercoins-backend
+  #   restart: always
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   env_file: .env
+
+  #   ports:
+  #     - "8888:8888"
+  #   volumes:
+  #     - .:/usr/app/payercoinsbackend
+  #   depends_on: 
+  #     - queue
+      # - database-sandbox
+      # - database-live
+
+  # MySQL and document data store
+  # database-live:
+  #   container_name: crypto-module-database-live
+  #   image: "postgres:latest"
+  #   environment:
+  #     POSTGRES_USER: payercoins
+  #     POSTGRES_PASSWORD: payercoins
+  #     POSTGRES_DB: payercoins_crypto_module_dev_live
+  #     POSTGRES_PORT: 5432
+  #     POSTGRES_HOST: localhost
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - database-live-data:/var/lib/postgresql/data/
+
+  # database-sandbox:
+  #   container_name: crypto-module-database-sandbox
+  #   image: "postgres:latest"
+  #   environment:
+  #     POSTGRES_USER: payercoins
+  #     POSTGRES_PASSWORD: payercoins
+  #     POSTGRES_DB: payercoins_crypto_module_dev_sandbox
+  #     POSTGRES_PORT: 5432
+  #     POSTGRES_HOST: localhost
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - database-sandbox-data:/var/lib/postgresql/data/
+
+  # Redis for messaging queue and caching
+  queue:
+    container_name: crypto-module-queue
+    hostname: queue
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+
+  
+
+volumes:
+    # database-live-data:
+    # database-sandbox-data:
+    redisdata:
+    # data:

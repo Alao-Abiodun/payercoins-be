@@ -1,0 +1,122 @@
+Start your docker compose
+    - docker-compose up
+or make two different database if you don't have docker (postgresSQL)
+
+input env for database in crypto_module
+    CRYPTO_MODULE_DATABASE_URL_LIVE=
+    CRYPTO_MODULE_DATABASE_URL_SANDBOX=
+
+npm db:runmigrations to run migrations
+
+// enviroment can either be 'live' or 'sandbox'
+const module = require('./crypto-module')(enviroment);
+
+// Objects
+
+CRYPTO = {
+    id: 1,
+    uuid: 'eb0d1d82-da9f-4881-a07a-abafa3ed48f1',
+    name: 'Ethereum',
+    slug: 'ethereum',
+    symbol: 'ETH',
+    sign: 'E',
+    type: 'utxo-asset',
+    isActive: true,
+    createdAt: '2021-08-23T07:33:50.632Z',
+    updatedAt: '2021-08-23T07:33:50.632Z'   
+}
+
+WALLET = {
+    id: 1,
+    uuid: 'd9c223c6-e435-4355-b65f-7912cc021ad1',
+    cryptoId: 1,
+    clientId: 1,
+    balance: '0.0000000000000000000000000',
+    isActive: true,
+    createdAt: '2021-08-24T00:45:32.319Z',
+    updatedAt: '2021-08-24T00:45:32.319Z',
+    crypto: [CRYPTO]
+}
+
+PAYMENTLINK = {
+    id: 6,
+    uuid: 'a412ae0a-8567-4917-a68d-5274ac440d84',
+    reference: '1081f3012871c881e262c183e5c1e1ef0d3d4a8b98305f4cde04533bfa7b6ada60b1c6875399a28f',
+    clientId: 1,
+    amount: '300.0000000000000000000000000',
+    type: 'web',
+    amountType: 'fixed',
+    avaialableCrypto: [ 'ethereum' ],
+    status: 'pending',
+    metaData: { description: 'ink to sell car', page: 'Sell Car', email: 'dan@gmail.com', name: 'Dan' },
+    expiresAt: '2021-08-30T08:58:04.856Z',
+    updatedAt: '2021-08-27T20:58:04.858Z',
+    createdAt: '2021-08-27T20:58:04.858Z'
+}
+
+/***
+ * @description Create new wallets for a client
+ * 
+ * @param {Number} UserId - UserId is a integer that represents the user
+ * @param {Number} CryptoTypes - CryptoTypes is an array of strings that represent the crypto types .eg ['bitcoin', 'ethereum']
+ * @returns {Object} - Returns a object which contains array of wallet. { wallets: [ [WALLET] ] }
+*/
+module.createWallets(UserId, CryptoTypes) 
+    return { wallets: [ [WALLET] ] }
+
+/***
+ * @description Create new wallets for a client, if the client already has wallets, it will return the existing wallets
+ * 
+ * @param {Number} UserId - UserId is a integer that represents the user
+ * @param {Number} CryptoTypes - CryptoTypes is an array of strings that represent the crypto types .eg ['bitcoin', 'ethereum']
+ * @returns {Object} - Returns a object which contains array of wallet. { wallets: [ [WALLET] ] }
+*/
+ module.createWalletsIfDoesNotExist(UserId, CryptoTypes) 
+    return { wallets: [ [WALLET] ] }
+
+/***
+ * @description get client wallets, would return wallet specified in the cryptoTypes
+ * 
+ * @param {Number} UserId - UserId is a integer that represents the user
+ * @param {Number} CryptoTypes - CryptoTypes is an array of strings that represent the crypto types .eg ['bitcoin', 'ethereum']
+ * @returns {Object} - Returns a object which contains array of wallet. { wallets: [ [WALLET] ] }
+*/
+  module.getWallets(UserId, CryptoTypes) 
+    return { wallets: [ [WALLET] ] }
+
+/***
+ * @description generate a new payment link
+ * 
+* @param {string} userId - The user id
+* @param {array} avaialableCrypto - the list of available crypto types the user wants to receive payment in
+* @param {Number} amount - the amount of the payment (in USD) can be null if its a custom amount
+* @param {integer} countDownTime - the time interval that users can use to pay for the payment (in minutes)
+* @param {string} type - the type (means) of the payment link (e.g. 'api', 'web')
+* @param {string} amountType - the type (means) of the payment link (e.g. 'fixed', 'custom')
+* @param {object} metaData -this is an object of metadata  - {description, email, name, page} 'email' & 'name' are optional on web payment links
+* @return {object}
+*/
+module.generatePaymentLink(UserId, avaialableCrypto, amount, countDownTime, type, metaData) 
+    return { details: [PAYMENTLINK], link: string }
+
+/***
+ * @description get client payment links
+ * 
+ * @param {Number} UserId - UserId is a integer that represents the user
+ * @returns {Object} - Returns a object which contains array of payment links. { details: [ [PAYMENTLINK] ] }
+*/
+module.getPaymentLinks(UserId, CryptoTypes) 
+    return { details: [ [PAYMENTLINK] ] }
+
+/***
+ * @description get client payment links
+ * 
+ * @param {Number} UserId - UserId is a integer that represents the user
+ * @param {string} reference - reference is a unquie string that represents the payment link
+ * @returns {Object} - Returns a object which contains a specific payment links. { details: [PAYMENTLINK] }
+*/
+module.getPaymentLink(UserId, reference) 
+    return { details: [ [PAYMENTLINK] ] }
+
+// link to import postman docs
+https://www.getpostman.com/collections/85ecf1f9802790fa08ff
